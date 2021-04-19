@@ -107,7 +107,11 @@ namespace MovieApp.Models
 
         public override bool ValidateUser(string username, string password)
         {
-            throw new NotImplementedException();
+            if ("admin".Equals(username) && "password".Equals(password))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
