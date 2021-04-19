@@ -10,16 +10,16 @@ namespace MovieApp.Models
     {
         public int Id { get; set; }
 
-        [DisplayName("Title")]
+        [DisplayName("タイトル")]
         public string Title { get; set; }
 
-        [DisplayName("Release Date")]
+        [DisplayName("公開日")]
         public DateTime Release { get; set; }
 
-        [DisplayName("Genre")]
+        [DisplayName("ジャンル")]
         public string Kind { get; set; }
 
-        [DisplayName("Price")]
+        [DisplayName("金額")]
         public string Price { get; set; }
     }
 }
