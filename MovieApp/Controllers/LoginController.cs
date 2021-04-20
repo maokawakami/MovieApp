@@ -40,7 +40,7 @@ namespace MovieApp.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Movies");
         }
     }
 }
