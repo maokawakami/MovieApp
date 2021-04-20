@@ -9,11 +9,11 @@ namespace MovieApp.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "ユーザー名は必須入力です")]
         [DisplayName("ユーザー名")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "パスワードは必須入力です")]
         [DisplayName("パスワード")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
