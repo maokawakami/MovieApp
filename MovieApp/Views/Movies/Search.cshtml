@@ -1,0 +1,89 @@
+﻿@using MovieApp.Models
+@model MovieApp.Models.SearchView
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Search</h2>
+
+
+@using (Html.BeginForm("Search", "Movies", FormMethod.Get))
+{
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kind, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kind, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Kind, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="検索" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@{ 
+    var movie = new Movie();
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => movie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => movie.Release)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => movie.Kind)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => movie.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Movies)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Release)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kind)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("編集", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("詳細", "Details", new { id = item.Id }) |
+                @Html.ActionLink("削除", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
