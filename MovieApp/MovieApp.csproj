@@ -231,6 +231,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MoviesContext.cs" />
+    <Compile Include="Models\SearchView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +246,7 @@
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Movies\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
