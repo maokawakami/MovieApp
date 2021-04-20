@@ -15,12 +15,14 @@ namespace MovieApp.Controllers
         private MoviesContext db = new MoviesContext();
 
         // GET: Movies
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Movies.ToList());
         }
 
         // GET: Movies/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -113,6 +115,24 @@ namespace MovieApp.Controllers
             db.Movies.Remove(movie);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        //検索機能
+        public ActionResult Search([Bind(Include = "Kind, Title")] SearchView model)
+        {
+            if (!string.IsNullOrEmpty(model.Kind) && !string.IsNullOrEmpty(model.Title))
+            {
+                var list = db.Movies.Where(item => item.Kind.IndexOf(model.Kind) == 0 
+                                                && item.Title.IndexOf(model.Title) == 0).ToList();
+                model.Movies = list;
+            }
+            else
+            {
+                model.Movies = db.Movies.ToList();
+            }
+
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)
