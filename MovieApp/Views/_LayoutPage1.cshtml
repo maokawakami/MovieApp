@@ -5,15 +5,30 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        body{
+            padding-top:70px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        @if (Request.IsAuthenticated)
-        {
-            @Html.ActionLink("ログアウト", "SignOut", new { Controller = "Login" })
-        }
-    </div>
-
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("MovieApp", "Index", new { Controller = "Movies" }, new { @class = "navbar-brand" })
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Request.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("ログアウト", "SignOut", "Login")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("ログイン", "Index", "Login")</li>
+                }
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         @RenderBody()
     </div>
