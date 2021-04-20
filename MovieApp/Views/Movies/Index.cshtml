@@ -5,10 +5,10 @@
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-<h2>Index</h2>
+<h3>一覧</h3>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新規作成", "Create")
 </p>
 <table class="table">
     <tr>
@@ -42,9 +42,9 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("編集", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("詳細", "Details", new { id=item.Id }) |
+            @Html.ActionLink("削除", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
