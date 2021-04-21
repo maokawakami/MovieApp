@@ -35,31 +35,40 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Kind, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Kind, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Kind, new SelectListItem[]
+                                    { new SelectListItem(){Value = "アクション", Text = "アクション"},
+                                      new SelectListItem(){Value = "アドベンチャー", Text = "アドベンチャー"},
+                                      new SelectListItem(){Value = "アニメーション", Text = "アニメーション"},
+                                      new SelectListItem(){Value = "コメディ", Text = "コメディ"},
+                                      new SelectListItem(){Value = "サスペンス", Text = "サスペンス"},
+                                      new SelectListItem(){Value = "スポーツ", Text = "スポーツ"},
+                                      new SelectListItem(){Value = "西部劇", Text = "西部劇"},
+                                      new SelectListItem(){Value = "ファンタジー", Text = "ファンタジー"},
+                                      new SelectListItem(){Value = "ホラー", Text = "ホラー"} },"ジャンルを選択", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Kind, "", new { @class = "text-danger" })
             </div>
-        </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn-primary" />
+                    </div>
+                </div>
             </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
