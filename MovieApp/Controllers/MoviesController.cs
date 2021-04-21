@@ -121,12 +121,28 @@ namespace MovieApp.Controllers
         //検索機能
         public ActionResult Search([Bind(Include = "Kind, Title")] SearchView model)
         {
+            //両方記載あり
             if (!string.IsNullOrEmpty(model.Kind) && !string.IsNullOrEmpty(model.Title))
             {
                 var list = db.Movies.Where(item => item.Kind.IndexOf(model.Kind) == 0 
                                                 && item.Title.IndexOf(model.Title) == 0).ToList();
                 model.Movies = list;
             }
+
+            //ジャンル名のみ記載
+            else if (!string.IsNullOrEmpty(model.Kind) && string.IsNullOrEmpty(model.Title))
+            {
+                var list = db.Movies.Where(item => item.Kind.IndexOf(model.Kind) == 0).ToList();
+                model.Movies = list;
+            }
+
+            //タイトル名のみ記載
+            else if (string.IsNullOrEmpty(model.Kind) && !string.IsNullOrEmpty(model.Title))
+            {
+                var list = db.Movies.Where(item => item.Title.IndexOf(model.Title) == 0).ToList();
+                model.Movies = list;
+            }
+
             else
             {
                 model.Movies = db.Movies.ToList();
