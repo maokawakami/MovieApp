@@ -20,11 +20,11 @@
             <ul class="nav navbar-nav navbar-right">
                 @if (Request.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("ログアウト", "SignOut", "Login")</li>
+                    @Html.ActionLink("ログアウト", "SignOut", new { Controller = "Login" })
                 }
                 else
                 {
-                    <li>@Html.ActionLink("ログイン", "Index", "Login")</li>
+                    @Html.ActionLink("ログイン", "Index", new { Controller = "Login" })
                 }
             </ul>
         </div>
