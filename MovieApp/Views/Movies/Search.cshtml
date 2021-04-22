@@ -9,7 +9,7 @@
 <h2>Search</h2>
 
 <p>
-    @Html.ActionLink("新規作成", "Create")
+    <a href="Create" class="btn btn-outline-warning"><i class="fas fa-angle-right"></i> 新規作成</a>
 </p>
 
 @using (Html.BeginForm("Search", "Movies", FormMethod.Get))
@@ -43,13 +43,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="検索" class="btn btn-primary" />
+                <input type="submit" value="検索" class="btn btn-outline-secondary" />
             </div>
         </div>
     </div>
 }
 
-@{ 
+@{
     var movie = new Movie();
 }
 
@@ -86,14 +86,46 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("編集", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("詳細", "Details", new { id = item.Id }) |
-                @Html.ActionLink("削除", "Delete", new { id = item.Id })
+                <button type="button" class="btn btn-success" id="#botton_for_openmodal" data-id="item.Id" data-url="@Url.Action("ShowModal")"><i class="fas fa-edit fa-fw"></i>解説</button>
+                @*<a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success botton_for_openmodal mb-8"><i class="fas fa-edit fa-fw"></i> 詳細</a>*@
+                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-edit"><i class="fas fa-chalkboard-teacher mr-1"></i> 編集</a>
+                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-remove"><i class="fas fa-trash-alt fa-fw"></i> 削除</a>
+                <div id="ModalHere"></div>
             </td>
         </tr>
     }
 
 </table>
+
+<!--Ajaxの処理を追加-->
+<script>
+    $(document).ready(function () {
+        $('#botton_for_openmodal').click(function () {
+            var url = $(this).data('url');
+            var id = $(this).attr('data-id');
+
+            $.ajax({
+                url: url + '/' + id,
+                type: 'get',
+                cache: false,
+            })
+
+                .done(function (response) {
+                    $("#ModalHere").html(response);
+                    $("#ModalHere").find('.modal').modal('show');
+                })
+
+                .fail(function (xhr) {
+                    console.log(xhr);
+                })
+
+                .always(function (xhr, msg) {
+                    console.log(xhr, msg);
+                });
+        });
+    });
+</script>
+
 
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
