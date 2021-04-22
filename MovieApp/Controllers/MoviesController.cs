@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MovieApp.Models;
@@ -50,6 +51,7 @@ namespace MovieApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,Release,Kind,Price")] Movie movie)
         {
+
             if (ModelState.IsValid)
             {
                 db.Movies.Add(movie);
@@ -158,6 +160,18 @@ namespace MovieApp.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //モーダル
+        public async Task<ActionResult> ShowModal(int id)
+        {
+            //何かしらの処理を記述
+            //今回はボタンから取得したIDに紐づくのユーザー情報を取得
+            var movies = await db.Movies.FirstOrDefaultAsync(m => m.Id == id);
+
+            //呼び出したいモ－ダル用のViewを指定（①で作ったもの）
+　　　　　　//渡したいデータは第二引数とする
+            return PartialView("View_Modal", "movies");
         }
     }
 }
