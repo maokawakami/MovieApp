@@ -6,10 +6,10 @@
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-<h2>Search</h2>
+<h3>Search</h3>
 
 <p>
-    <a href="Create" class="btn btn-outline-warning"><i class="fas fa-angle-right"></i> 新規作成</a>
+    <a href="Create" class="btn btn-outline-warning"><i class="fas fa-angle-right"></i>新規作成</a>
 </p>
 
 @using (Html.BeginForm("Search", "Movies", FormMethod.Get))
@@ -86,10 +86,10 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <button type="button" class="btn btn-success" id="#botton_for_openmodal" data-id="item.Id" data-url="@Url.Action("ShowModal")"><i class="fas fa-edit fa-fw"></i>解説</button>
+                <button type="button" class="btn btn-success botton_for_openmodal mb-8" data-id="@item.Id" data-url="@Url.Action("ShowModal")"><i class="fas fa-edit fa-fw"></i>解説</button>
                 @*<a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success botton_for_openmodal mb-8"><i class="fas fa-edit fa-fw"></i> 詳細</a>*@
-                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-edit"><i class="fas fa-chalkboard-teacher mr-1"></i> 編集</a>
-                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-remove"><i class="fas fa-trash-alt fa-fw"></i> 削除</a>
+                <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-edit"><i class="fas fa-chalkboard-teacher mr-1"></i>編集</a>
+                <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-remove"><i class="fas fa-trash-alt fa-fw"></i>削除</a>
                 <div id="ModalHere"></div>
             </td>
         </tr>
@@ -99,30 +99,22 @@
 
 <!--Ajaxの処理を追加-->
 <script>
-    $(document).ready(function () {
-        $('#botton_for_openmodal').click(function () {
-            var url = $(this).data('url');
-            var id = $(this).attr('data-id');
+    $(document).on("click", ".botton_for_openmodal", function () {
+        var url = $(this).data('url');
+        var id = $(this).attr('data-id');
 
-            $.ajax({
-                url: url + '/' + id,
-                type: 'get',
-                cache: false,
+
+        $.ajax({
+            url: url + '/' + id,
+            type: 'GET',
+            cache: false,
+        })
+
+            .done(function (response) {
+                $("#ModalHere").html(response);
+                $("#ModalHere").find('.modal').modal('show');
+                console.log(response);
             })
-
-                .done(function (response) {
-                    $("#ModalHere").html(response);
-                    $("#ModalHere").find('.modal').modal('show');
-                })
-
-                .fail(function (xhr) {
-                    console.log(xhr);
-                })
-
-                .always(function (xhr, msg) {
-                    console.log(xhr, msg);
-                });
-        });
     });
 </script>
 

@@ -27,5 +27,7 @@ namespace MovieApp.Models
         [Required(ErrorMessage = "金額を入力してください")]
         [DisplayName("金額")]
         public string Price { get; set; }
+
+        public string Explain { get; set; }
     }
 }

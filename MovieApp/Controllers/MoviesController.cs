@@ -163,15 +163,18 @@ namespace MovieApp.Controllers
         }
 
         //モーダル
-        public async Task<ActionResult> ShowModal(int id)
+        public ActionResult View_modal()
         {
-            //何かしらの処理を記述
-            //今回はボタンから取得したIDに紐づくのユーザー情報を取得
+            return RedirectToAction("Search");
+        }
+        public async Task<ActionResult> ShowModal(int? id)
+        {
+            //ボタンから取得したIDに紐づくユーザー情報を取得
             var movies = await db.Movies.FirstOrDefaultAsync(m => m.Id == id);
 
-            //呼び出したいモ－ダル用のViewを指定（①で作ったもの）
+            //呼び出したいモ－ダル用のViewを指定
 　　　　　　//渡したいデータは第二引数とする
-            return PartialView("View_Modal", "movies");
+            return PartialView("View_modal", movies);
         }
     }
 }
