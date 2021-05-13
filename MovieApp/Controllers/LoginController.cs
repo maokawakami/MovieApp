@@ -29,7 +29,7 @@ namespace MovieApp.Controllers
                 if (this.membershipProvider.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false);
-                    return RedirectToAction("Index", "Movies");
+                    return RedirectToAction("Search", "Movies");
                 }
             }
             ViewBag.Message = "ログインに失敗しました";
@@ -40,7 +40,7 @@ namespace MovieApp.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Movies");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

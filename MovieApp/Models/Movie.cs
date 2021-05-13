@@ -26,8 +26,10 @@ namespace MovieApp.Models
 
         [Required(ErrorMessage = "金額を入力してください")]
         [DisplayName("金額")]
+        [RegularExpression(@"[0-9]+", ErrorMessage = "数字を入力してください")]
         public string Price { get; set; }
 
+        [DisplayName("作品解説")]
         public string Explain { get; set; }
     }
 }

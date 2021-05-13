@@ -120,9 +120,10 @@ namespace MovieApp.Controllers
         }
 
 
-        //検索機能
+        //Search
         public ActionResult Search([Bind(Include = "Kind, Title")] SearchView model)
         {
+            //検索機能
             //両方記載あり
             if (!string.IsNullOrEmpty(model.Kind) && !string.IsNullOrEmpty(model.Title))
             {
